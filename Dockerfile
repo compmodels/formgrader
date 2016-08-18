@@ -4,6 +4,7 @@ FROM jupyter/scipy-notebook
 USER root
 ENV SHELL /bin/bash
 ENV HOME /root
+WORKDIR /root
 RUN userdel -r $NB_USER
 RUN apt-get update
 RUN apt-get -y install libpq-dev
@@ -22,6 +23,11 @@ RUN chmod +x /srv/entrypoint.sh
 # Add the formgrade.sh script
 ADD formgrade.sh /srv/formgrade.sh
 RUN chmod +x /srv/formgrade.sh
+
+# smoke test entrypoint
+RUN mkdir /home/nbgraderusertest
+RUN chown 65000:65000 /home/nbgraderusertest
+RUN NBGRADER_USER_ID=65000 NBGRADER_USER=nbgraderusertest sh /srv/entrypoint.sh -h && userdel -r nbgraderusertest
 
 # Run the formgrader
 ENTRYPOINT ["/srv/entrypoint.sh"]
