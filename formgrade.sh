@@ -8,6 +8,7 @@ if [ -n "$ASSIGNMENTS_REPO_URL" ]; then
         cd $ASSIGNMENTS_REPO_NAME
         git remote rm origin
         git remote add origin $ASSIGNMENTS_REPO_URL
+        pip install --user -r requirements.txt
         cd $HOME
     fi
 fi
