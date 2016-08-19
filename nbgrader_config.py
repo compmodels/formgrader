@@ -1,7 +1,7 @@
 c = get_config()
 
 c.FormgradeApp.ip = "0.0.0.0"
-c.FormgradeApp.port = 9000
+c.FormgradeApp.port = 9001
 c.FormgradeApp.authenticator_class = "nbgrader.auth.hubauth.HubAuth"
 
 import os
